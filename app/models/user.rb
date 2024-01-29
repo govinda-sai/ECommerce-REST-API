@@ -14,6 +14,7 @@ class User # rubocop:disable Style/Documentation
   field :dob, type: Date
   field :status, type: String
   field :authentication_token, type: String
+  field :order_id, type: BSON::ObjectId
 
   validate :password_presence, on: :create
 
