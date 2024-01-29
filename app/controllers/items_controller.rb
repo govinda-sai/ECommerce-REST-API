@@ -33,7 +33,7 @@ class ItemsController < ApplicationController # rubocop:disable Style/Documentat
               if @item.save # rubocop:disable Metrics/BlockNesting
                 render json: @item, status: :created
               else
-                render json: { message: 'item couldn\'t be created' }, status: :unprocessable_entity
+                render json: { message: 'item couldn\'t be created', errors: @item.errors.full_messages }, status: :unprocessable_entity
               end
             else
               render json: { message: 'price should be greater than 0' }, status: :unprocessable_entity

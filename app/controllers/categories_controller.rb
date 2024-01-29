@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController # rubocop:disable Style/Docum
     }
   end
 
-  def create # rubocop:disable Metrics/MethodLength
+  def create # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     @category = Category.new(category_params)
     if @category.category_code.present?
       if @category.category_description.present?
@@ -32,7 +32,8 @@ class CategoriesController < ApplicationController # rubocop:disable Style/Docum
         elsif @category.save
           render json: @category, status: :created, location: @category
         else
-          render json: { message: 'category couldn\'t be created' }, status: :unprocessable_entity
+          render json: { message: 'category couldn\'t be created', errors: @cateogory.errors.full_messages },
+                 status: :unprocessable_entity
         end
       else
         render json: { message: 'category description cannot be null' }, status: :unprocessable_entity
